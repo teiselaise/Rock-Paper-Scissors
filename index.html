@@ -1,0 +1,47 @@
+<script type="text/javascript">
+	function computerPlay() {
+		selectionNumber = Math.floor(Math.random() * 3);
+		if (selectionNumber === 0)
+			return "Rock";
+		if (selectionNumber === 1)
+			return ("Paper")
+		return ("Scissor")
+	}
+
+	function playRound(playerSelection, computerSelection) {
+		playerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.substr(1).toLowerCase();
+		computerSelection = computerSelection.charAt(0).toUpperCase() + computerSelection.substr(1).toLowerCase();
+
+		if (playerSelection === computerSelection)
+			return "Tie!";
+
+		if (playerSelection === "Rock" && computerSelection === "Paper" ||
+			playerSelection === "Paper" && computerSelection === "Scissor" ||
+			playerSelection === "Scissor" && computerSelection === "Rock")
+			return "You loose " + computerSelection + " beats " + playerSelection;
+
+		return "You win! " + playerSelection + " beats " + computerSelection;
+	}
+
+	function game() {
+		let playerWins = 0;
+		let computerWins = 0;
+
+		let roundResult;
+
+		for (let i = 0; i < 5; i++) {
+			roundResult = playRound(prompt("Enter your hand gesture"), computerPlay());
+
+			//The 5th char because that char denotes wether the player won or lost. Yes this is a horrific way of doing it, but the exercise forced me to it :(
+			if (roundResult.charAt(5) === "w")
+				++playerWins;
+			else
+				++computerWins;
+
+			console.log(roundResult)
+		}
+
+		console.log( (playerWins > computerWins) ? "You win the game!" : "You loose the game!" );
+
+	}
+</script>
